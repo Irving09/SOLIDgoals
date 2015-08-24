@@ -1,0 +1,13 @@
+- Interfaces represent the boundaries between what client code requires and how that requirement is implemented.
+The interface segregation principle states that interfaces should be small.
+
+- At their simplest, interfaces contain single methods that serve a single purpose. 
+At this level of granularity, they are akin to delegates, but with many added benefits
+
+- This chapter works through a complete example that progresses from
+a single monolithic interface to multiple smaller interfaces.
+
+ - Interfaces represent the boundaries between what client code requires and how that requirement is implemented.
+ - The interface segregation principle states that interfaces should be small.
+ - At their simplest, interfaces contain single methods that serve a single purpose.
+ - At this level of granularity, they are akin to delegates, but with many added benefits.

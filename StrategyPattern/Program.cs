@@ -8,7 +8,7 @@ namespace StrategyPattern
     public class Program {
         public void Main(string[] args) {
             //  TestAntiPattern();
-            TestStrategyPattern();
+            //  TestStrategyPattern();
         }
         
         public static void TestAntiPattern() {

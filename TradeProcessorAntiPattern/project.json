@@ -1,13 +1,12 @@
 {
   "version": "1.0.0-*",
-  "description": "SOLID_Principles Console Application",
+  "description": "TradeProcessorAntiPattern Console Application",
   "tags": [
     ""
   ],
   "projectUrl": "",
   "licenseUrl": "",
   "dependencies": {
-    
   },
   "commands": {
     "run": "run"
@@ -20,11 +19,11 @@
     },
     "dnxcore50": {
       "dependencies": {
+        "System.Collections": "4.0.10-beta-23109",
         "System.Console": "4.0.0-beta-23109",
         "System.Linq": "4.0.0-beta-23109",
         "System.Threading": "4.0.10-beta-23109",
         "Microsoft.CSharp": "4.0.0-beta-23109",
-        "System.Collections": "4.0.10-beta-23109",
         "System.Data.SqlClient": "4.0.0-beta-23123"
       }
     }

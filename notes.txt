@@ -1,0 +1,14 @@
+Single Responsibility
+
+Open/Closed Principle
+	- Software entities should be open for extension, but closed for modification
+	- Open for extension => you are able to extend the module with newbehavior and satisfy necessary changes
+	- Closed for modification => extending behaviors should NOT result in changes to the source or binary code,
+	    whether in a linkable library, a DLL, a Java .jar file, should remain UNTOUCHED.
+		
+NOTE: any change is allowed to existing code
+	  as long as it does NOT also require a change to any client of that code.
+
+Liskov Substitution Principle
+	- a collection of guidelines for creating inheritance hierarchies
+	  in which a client can reliably use any class or subclass without compromising the expected behavior

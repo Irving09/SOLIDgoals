@@ -1,15 +1,19 @@
+using System.Linq;
+using AntiPattern;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.IO;
-using AntiPattern;
+using System.Data.SqlClient;
+using System.Data;
 
 namespace SOLID_Principles
 {
-    public class TradeProcessor_Sol1
-    {
-        ￼￼public void ProcessTrades(Stream stream) {
+    public class TradeProcessor_Sol1 {
+        //NOTE This is also an antipattern:
+        // what you achieved is only clarity, but NOT adaptability.
+        // split each responsibility into different classes and place them behind interfaces.
+        // what you need is true abstraction to achieve useful adaptability.
+        public void ProcessTrades(Stream stream) {
            IEnumerable<string> lines = ReadTradeData(stream);
            var trades = ParseTrades(lines);
            StoreTrades(trades);
@@ -37,10 +41,9 @@ namespace SOLID_Principles
                 if(!ValidateTradeData(fields, lineCount)) {
                     continue;
                 }
-                // TODO
-                //  var trade = MapTradeDataToTradeRecord(fields);
-               //  trades.Add(trade);
-               lineCount++;
+                var trade = MapTradeDataToTradeRecord(fields);
+                trades.Add(trade);
+                lineCount++;
             }
             return trades;
         }
@@ -96,30 +99,29 @@ namespace SOLID_Principles
         
         private void StoreTrades(IEnumerable<TradeRecord> trades)
         {
-            //TODO Not working because of vs code
-            //  using (var connection = new System.Data.SqlClient.SqlConnection("DataSource=(local);Initial Catalog=TradeDatabase;Integrated Security=True"))
-            //  {
-            //      connection.Open();
-            //      using (var transaction = connection.BeginTransaction())
-            //      {
-            //          foreach (var trade in trades)
-            //          {
-            //              var command = connection.CreateCommand();
-            //              command.Transaction = transaction;
-            //              command.CommandType = System.Data.CommandType.StoredProcedure;
-            //              command.CommandText = "dbo.insert_trade";
-            //              command.Parameters.AddWithValue("@sourceCurrency", trade.SourceCurrency);
-            //              command.Parameters.AddWithValue("@destinationCurrency",
-            //              trade.DestinationCurrency);
-            //              command.Parameters.AddWithValue("@lots", trade.Lots);
-            //              command.Parameters.AddWithValue("@price", trade.Price);
-            //              command.ExecuteNonQuery();
-            //          }
-            //          transaction.Commit();
-            //      }
-            //      connection.Close();
-            //  }
-            //  LogMessage("INFO: {0} trades processed", trades.Count());
+            using (var connection = new System.Data.SqlClient.SqlConnection("DataSource=(local);Initial Catalog=TradeDatabase;Integrated Security=True"))
+            {
+                connection.Open();
+                using (var transaction = connection.BeginTransaction())
+                {
+                    foreach (var trade in trades)
+                    {
+                        var command = connection.CreateCommand();
+                        command.Transaction = transaction;
+                        command.CommandType = System.Data.CommandType.StoredProcedure;
+                        command.CommandText = "dbo.insert_trade";
+                        command.Parameters.AddWithValue("@sourceCurrency", trade.SourceCurrency);
+                        command.Parameters.AddWithValue("@destinationCurrency",
+                        trade.DestinationCurrency);
+                        command.Parameters.AddWithValue("@lots", trade.Lots);
+                        command.Parameters.AddWithValue("@price", trade.Price);
+                        command.ExecuteNonQuery();
+                    }
+                    transaction.Commit();
+                }
+                connection.Close();
+            }
+            LogMessage("INFO: {0} trades processed", trades.Count());
         }
         
         private static float LotSize = 100000f;
