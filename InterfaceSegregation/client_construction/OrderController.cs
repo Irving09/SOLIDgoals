@@ -1,24 +1,24 @@
-public class OrderController {
-	private readonly IRead<Order> _reader;
-	private readonly ISave<Order> _saver;
-	private readonly IDelete<Order> _deleter;
-	public OrderController(IRead<Order> orderReader,
-						   ISave<Order> orderSaver,
-						   IDelete<Order> orderDeleter) {
+public class OrderController<T> {
+	private readonly IRead<T> _reader;
+	private readonly ISave<T> _saver;
+	private readonly IDelete<T> _deleter;
+	public OrderController(IRead<T> orderReader,
+						   ISave<T> orderSaver,
+						   IDelete<T> orderDeleter) {
 		_reader = orderReader;
 		_saver = orderSaver;
 		_deleter = orderDeleter;
 	}
-	public void CreateOrder(Order order) {
+	public void CreateOrder(T order) {
 		_saver.Save(order);
 	}
-	public Order GetSingleOrder(int identity) {
+	public T GetSingleOrder(int identity) {
 		return _reader.ReadOne(identity);
 	}
-	public void UpdateOrder(Order order) {
+	public void UpdateOrder(T order) {
 		_saver.Save(order);
 	}
-	public void DeleteOrder(Order order) {
+	public void DeleteOrder(T order) {
 		_deleter.Delete(order);
 	}
 }
