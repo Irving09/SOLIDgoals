@@ -1,16 +1,17 @@
 {
   "version": "1.0.0-*",
   "description": "InterfaceSegregation Console Application",
-  "tags": [""],
+  "tags": [
+    ""
+  ],
   "projectUrl": "",
   "licenseUrl": "",
-
-  "dependencies": {},
-
+  "dependencies": {
+    "System.Threading": "4.0.0-beta-23123"
+  },
   "commands": {
     "run": "run"
   },
-
   "frameworks": {
     "dnx451": {},
     "dnxcore50": {
@@ -18,7 +19,7 @@
         "System.Collections": "4.0.10-beta-23109",
         "System.Console": "4.0.0-beta-23109",
         "System.Linq": "4.0.0-beta-23109",
-        "System.Threading": "4.0.10-beta-23109",
+        "System.Threading.Thread": "4.0.0-beta-23123",
         "Microsoft.CSharp": "4.0.0-beta-23109"
       }
     }

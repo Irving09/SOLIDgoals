@@ -11,3 +11,11 @@ a single monolithic interface to multiple smaller interfaces.
  - The interface segregation principle states that interfaces should be small.
  - At their simplest, interfaces contain single methods that serve a single purpose.
  - At this level of granularity, they are akin to delegates, but with many added benefits.
+ 
+ - If clients are to use interfaces, they must be provided via constructor parameters.
+ - The manner in which you supply the implementations to clients is partly dictated by the number of implementations
+ of the segregated interfaces.
+ 
+ - monolithic interfaces tend to hand too much control to clients.
+ - it clouds the intent and misdirecting the focus
+ - ALL classes should ALWAYS have a single responsibility
